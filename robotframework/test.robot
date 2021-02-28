@@ -1,18 +1,14 @@
-* Settings *
-Library         SeleniumLibrary
-
-Test Setup       Open Browser And Go To Page
-Test Teardown    Close Browser
- 
-* Variables *
-${FORM_URL}         https://www.google.com/
-${BROWSER}          chrome
- 
-* Test Cases *
-Page Should Show Header
-    [Documentation]     When visit the page it should show the text Hello World
-    Page Should Contain     Google
- 
-* Keywords *
-Open Browser And Go To Page
-    Open Browser    ${FORM_URL}   ${BROWSER}
+*** Settings ***
+Library    SeleniumLibrary
+*** Variables ***
+${BROWSER}    chrome
+${URL}    https://www.facebook.com/
+*** Test Cases ***
+Test login Facebook failed
+    Open Browser    ${URL}    ${BROWSER}
+	   Input Text    id=email    abc
+	   Input Text    id=pass    123
+	   Submit Form
+	   Wait Until Page Contains    Kornkanok Khosungnoen
+	   Capture Page Screenshot    login-failed.png
+	   [Teardown]    Close Browser
